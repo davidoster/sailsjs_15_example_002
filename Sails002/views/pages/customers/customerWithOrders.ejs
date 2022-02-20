@@ -1,0 +1,43 @@
+<% 
+  let customer = { 
+    id: customerWithOrders.customer.id,
+    name: customerWithOrders.customer.firstName + " " + customerWithOrders.customer.lastName,
+    email: customerWithOrders.customer.email,
+    telephone: customerWithOrders.customer.tel,
+    address: customerWithOrders.customer.address
+  };
+%>
+
+<div id="customer-with-orders" v-cloak  class="container">
+  <div class="row">
+    <div class="row">Customer's Data</div>
+    <div class="row">
+      <div class="col">Id</div>
+      <div class="col">Name</div>
+      <div class="col">Email</div>
+      <div class="col">Telephone</div>
+      <div class="col">Address</div>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><%= customerWithOrders.customer.id %></div>
+    <div class="col"><%= customer.name %></div>
+    <div class="col"><%= customer.email %></div>
+    <div class="col"><%= customer.telephone %></div>
+    <div class="col"><%= customer.address %></div>
+  </div>
+  <div class="row">
+    <div class="col"><%= customerWithOrders.customer.id %></div>
+    <div class="col"><%= customer.name %></div>
+    <div class="col"><%= customer.email %></div>
+    <div class="col"><%= customer.telephone %></div>
+    <div class="col"><%= customer.address %></div>
+  </div>
+  <div class="row">
+    <div class="col"><%= customerWithOrders.customer.id %></div>
+    <div class="col"><%= customer.name %></div>
+    <div class="col"><%= customer.email %></div>
+    <div class="col"><%= customer.telephone %></div>
+    <div class="col"><%= customer.address %></div>
+  </div>
+</div>

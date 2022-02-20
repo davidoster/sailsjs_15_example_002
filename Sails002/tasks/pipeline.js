@@ -34,8 +34,10 @@
 var cssFilesToInject = [
 
   // Bring in `.css` files for themes and style guides (e.g. Bootstrap, Foundation)
+  'dependencies/bootstrap/dist/css/**/*.css',
   'dependencies/**/*.css',
-
+  // Add the line below to pull in all css files from the vendor folder
+  'vendor/**/*.css',
   // All of the rest of your custom `.css` files will be injected here,
   // in no particular order.  To customize the ordering, add additional
   // items here, _above_ this one.
@@ -67,8 +69,10 @@ var jsFilesToInject = [
   // Bring in `.js` files for any other client-side JavaScript dependencies.
   // (e.g. Lodash, Vue.js, jQuery, Bootstrap, Ember, Angular, etc.)
   // > Be sure to list dependencies that depend on each other in the right order!
+  'dependencies/bootstrap/dist/js/bootstrap.js',
   'dependencies/**/*.js',
-
+  // Do the same for the js files
+  'vendor/**/*.js',
   // All of the rest of your custom client-side js files will be injected here,
   // in no particular order.  To customize the ordering, add additional items
   // here, _above_ this one.

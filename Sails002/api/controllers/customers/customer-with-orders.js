@@ -30,6 +30,9 @@ module.exports = {
 
 
   exits: {
+    success: {
+      viewTemplatePath: 'pages/customers/customerWithOrders'
+    }
 
   },
 
@@ -38,10 +41,10 @@ module.exports = {
     
     // just testing for multiple orders
     // await createTestData(inputs.id, await Product.find( { id: { in: [1,2] } } ));
-    
+
     let productOrders = await Order.find( { customer_id: customer.id } ).populate('products');
     customerWithOrders = new CustomerOrders(customer[0], productOrders);
     // All done.
-    return customerWithOrders;
+    return { customerWithOrders: customerWithOrders };
   },
 };
