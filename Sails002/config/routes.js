@@ -22,6 +22,7 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   '/products': { action: 'products-controller' },
   '/customers': { action: 'customers-controller' },
+  '/customers/:id/details': { action: 'customers/customer-with-orders' },
   '/orders': { action: 'orders-controller'},
 
   /***************************************************************************
