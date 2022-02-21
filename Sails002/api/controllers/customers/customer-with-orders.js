@@ -33,10 +33,13 @@ module.exports = {
     success: {
       viewTemplatePath: 'pages/customers/customerWithOrders'
     }
-
   },
 
   fn: async function (inputs) {
+    // create Order
+    // create order for customer
+    // let createdOrder = await Order.create( { customer_id: inputs.id, totalPrice: ((10000 * 2) + (100000 * 2)) } ).fetch();
+
     let customer = await Customer.find( { id: inputs.id }).populate('orders');
     
     // just testing for multiple orders
