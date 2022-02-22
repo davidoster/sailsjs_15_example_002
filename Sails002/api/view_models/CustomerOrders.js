@@ -1,5 +1,3 @@
-const customersController = require("../controllers/customers-controller");
-
 class CustomerOrders {
     constructor(customer, productOrders, compactData = true) {
         this.customer = {
@@ -18,11 +16,16 @@ class CustomerOrders {
                 orderWithProducts.totalPrice = order.totalPrice;
                 orderWithProducts.created = order.createdAt;
                 orderWithProducts.updated = order.updatedAt;
+                // customer data with orders' data (WITHOUT PRODUCTS)
+
                 let products;
+                // PLEASE change this awfull code!!! It smells BAD!!!!
+                // You need to break by the time you find the correct order id
                 productOrders.forEach(product => {
                     // console.log(product);
+                    // product.id == orderId
                     if (product.id == order.id) {
-                        // this needs to be changed in order to get the quantity also!!!
+                        // this needs to be changed in order to get the quantity also!!!???????
                         products = product.products;
                     }
                 });

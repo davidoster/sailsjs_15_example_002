@@ -2,7 +2,10 @@ const { CustomerOrders } = require("../../view_models/CustomerOrders");
 
 async function createTestData(customer_id, products) {
   // create order for customer
-  let createdOrder = await Order.create( { customer_id: customer_id, totalPrice: ((products[0].price * 2) + (products[1].price * 2)) } ).fetch();
+  let createdOrder = await Order.create( { 
+    customer_id: customer_id, 
+    totalPrice: ((products[0].price * 2) + (products[1].price * 2)) 
+  }).fetch();
   // add products to order
   await Order.addToCollection(createdOrder.id, 'products', [products[0].id, products[1].id]);
   

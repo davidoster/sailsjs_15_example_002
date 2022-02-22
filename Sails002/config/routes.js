@@ -24,6 +24,7 @@ module.exports.routes = {
   '/customers': { action: 'customers-controller' },
   '/customers/:id/details': { action: 'customers/customer-with-orders' },
   '/orders': { action: 'orders-controller'},
+  'POST /orders/quantities': { action: 'order-products-quantities' },
 
   /***************************************************************************
   *                                                                          *
