@@ -179,7 +179,20 @@
   document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', formData, "Add", "Cancel", () => {
     // STEP 3.
     // send these data to the back end by creating an order
-    console.log(`p1 value : ${document.getElementById('p1value').value}`);
+    // 3.a gather the data:
+    // customerId, productId, quantity, product price
+    // 3.b create a controller that accepts these data
+    // 3.c. inside the controller make a new order .....
+    let productId = document.getElementById('listOfProducts').value;
+    let price = formData.products.find(product => product.id == productId).price;
+    let quantity = document.getElementById(`p${productId}value`).value;
+    let newOrder = { 
+      customerId: '<%= customerWithOrders.customer.id %>',
+      productId: productId,
+      productPrice: price,
+      quantity: quantity
+    }
+    console.log(newOrder);
     console.log('You created an order!');
   });
 </script>

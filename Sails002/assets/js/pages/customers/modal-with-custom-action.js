@@ -32,7 +32,7 @@ const showModal = (title, formData, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
               Yes. With AJAX or WebSockets!
               Can you do it?
             -->
-            <select>
+            <select id='listOfProducts'>
               ${formData.products.map(product => {
                 return `<option value=${product.id}>${product.name}</option>`;
               }).join("")}
