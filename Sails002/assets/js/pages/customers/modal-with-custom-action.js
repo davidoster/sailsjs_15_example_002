@@ -10,7 +10,7 @@ var modalWrap = null;
  * @param {string} noBtnLabel label of No button 
  * @param {function} callback callback function when click Yes button
  */
-const showModal = (title, description, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', callback) => {
+const showModal = (title, formData, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', callback) => {
   if (modalWrap !== null) {
     modalWrap.remove();
   }
@@ -25,11 +25,36 @@ const showModal = (title, description, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <select name="products" id="products">
-                <option value="1">Product 1</option>
-                <option value="2">Product 2</option>
+            <p>Select products for the customer ${formData.customerName} with id: ${formData.customerId}</p>
+            <!-- 
+              STEP 1.
+              Can we bring the products dynamically?
+              Yes. With AJAX or WebSockets!
+              Can you do it?
+            -->
+            <select>
+              <option value=${formData.products[0].id}>${formData.products[0].name}</option>
+              <option value=${formData.products[1].id}>${formData.products[1].name}</option>
             </select>
-            <p>${description}</p>
+            
+            <!--
+              STEP 2. 
+              How can we show just once per select the number of Product X?
+              This can help you: https://write.corbpie.com/bootstrap-5-accordion-catch-hide-and-show-events/
+            -->
+            <div>
+              <label for="p${formData.products[0].id}" class="form-label">Select number of products</label>
+              <input 
+                type="range" 
+                class="form-range" 
+                min="0" max="10" 
+                value="${formData.products[0].quantity}" 
+                id="p${formData.products[0].id}" onchange="p1value.value=value" />
+              <output id="p${formData.products[0].id}value">${formData.products[0].quantity}</output>
+            </div>
+            
+            <hr>
+            <h5>${formData.question}</h5>
           </div>
           <div class="modal-footer bg-light">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${noBtnLabel}</button>

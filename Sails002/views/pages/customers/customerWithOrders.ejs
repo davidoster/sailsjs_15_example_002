@@ -142,10 +142,30 @@
   </div>
 </div>
 
-<script src="modal-with-custom-action.js"></script>
 <script>
-  document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', 'Add this Order?', "Yes", "No", () => 
+  let formData = { 
+    customerId: '<%= customerWithOrders.customer.id %>', 
+    customerName: '<%= customerWithOrders.customer.name %>',
+    /*
+       <!-- 
+              STEP 1.
+              Can we bring the products dynamically?
+              Yes. With AJAX or WebSockets!
+              Can you do it?
+        -->
+    */
+    products: [ 
+      { id: 1, name: "Smart Home", price: 10000,  quantity: 0 }, 
+      { id: 2, name: "Smart Car",  price: 100000, quantity: 0 }
+    ],
+    question: 'Add this Order?'
+  }
+  
+  document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', formData, "Yes", "No", () => 
   {
+    // STEP 3.
+    // send these data to the back end by creating an order
+    console.log(`p1 value : ${document.getElementById('p1value').value}`);
     console.log('You created an order!');
   });
 </script>
