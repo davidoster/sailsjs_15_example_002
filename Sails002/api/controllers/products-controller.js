@@ -18,7 +18,7 @@ module.exports = {
     //     description: req.description 
     //   }).fetch();
     // All done.
-    let products = Product.find().populate('orders');
+    let products = Product.find(); //.populate('orders');
     return products;
 
   }

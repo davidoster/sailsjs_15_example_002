@@ -3,10 +3,10 @@
   <div class="row">
     <div class="row">
       <h3 class="col-md-4">Customer's Data</h3>
-      
+
       <button class="col-md-1 btn btn-info btn-medium" type="button" id="orderAdd">Add</button>
       <div class="col-md-3 col-heading">
-        <button class="btn btn-warning btn-medium" type="button" >Edit</button>
+        <button class="btn btn-warning btn-medium" type="button">Edit</button>
         <button class="btn btn-danger btn-medium" type="button">Delete</button>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <div class="col-md-2 col-heading">Email</div>
       <div class="col-md-2 col-heading">Telephone</div>
       <div class="col-md-4 col-heading">Address</div>
-      
+
     </div>
   </div>
   <div class="row">
@@ -74,21 +74,13 @@
               <div class="col col-heading">Created At</div>
               <div class="col col-heading">Updated At</div>
             </div>
-            <% /* 
-                can I make an AJAX call to return an array of quantities for the order with order
-                id=customerWithOrders.ordersWithProducts[i] and products'
-                id=customerWithOrders.ordersWithProducts[i].products where we get just the ids to send to a controller
-                that accepts a number and an array of products ids 
-              */ 
-              let productIds=[]; 
-              for(let j=0; j < customerWithOrders.ordersWithProducts[i].products.length; j++) {
-                productIds.push(customerWithOrders.ordersWithProducts[i].products[j].id); 
-              } 
-              let orderProducts= {
-                orderId:customerWithOrders.ordersWithProducts[i].id, 
-                productIds: productIds
-              }; 
-            %>
+            <% /* can I make an AJAX call to return an array of quantities for the order with order
+              id=customerWithOrders.ordersWithProducts[i] and products'
+              id=customerWithOrders.ordersWithProducts[i].products where we get just the ids to send to a controller
+              that accepts a number and an array of products ids */ let productIds=[]; for(let j=0; j <
+              customerWithOrders.ordersWithProducts[i].products.length; j++) {
+              productIds.push(customerWithOrders.ordersWithProducts[i].products[j].id); } let orderProducts={
+              orderId:customerWithOrders.ordersWithProducts[i].id, productIds: productIds }; %>
               <% for(let j=0; j < customerWithOrders.ordersWithProducts[i].products.length; j++) { %>
                 <script>
                   var orderId = '<%= orderProducts.orderId %>';
@@ -124,7 +116,7 @@
                   <div class="col">
                     <%= customerWithOrders.ordersWithProducts[i].products[j].description %>
                   </div>
-                  <div class="col" 
+                  <div class="col"
                     id='<%= "o" + customerWithOrders.ordersWithProducts[i].id + "p" + customerWithOrders.ordersWithProducts[i].products[j].id %>'>
                   </div>
                   <div class="col">
@@ -143,26 +135,48 @@
 </div>
 
 <script>
-  let formData = { 
-    customerId: '<%= customerWithOrders.customer.id %>', 
-    customerName: '<%= customerWithOrders.customer.name %>',
-    /*
-       <!-- 
-              STEP 1.
-              Can we bring the products dynamically?
-              Yes. With AJAX or WebSockets!
-              Can you do it?
-        -->
-    */
-    products: [ 
-      { id: 1, name: "Smart Home", price: 10000,  quantity: 0 }, 
-      { id: 2, name: "Smart Car",  price: 100000, quantity: 0 }
-    ],
-    question: 'Add this Order?'
+  let productsFromDB = [];
+  let formData = {};
+
+  function getProducts() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var result = Array.from(JSON.parse(this.responseText));
+        formData = {
+          customerId: '<%= customerWithOrders.customer.id %>',
+          customerName: '<%= customerWithOrders.customer.name %>',
+          /*
+             <!-- 
+                    STEP 1.
+                    1a. Create a controller that returns the products <--- JSON Array with products
+                    1b. Make the call to get the products
+                    Can we bring the products dynamically?
+                    Yes. With AJAX or WebSockets!
+                    Can you do it?
+              -->
+          */
+          products: result,
+          question: 'Add this Order?'
+        }
+      }
+    }
+    xhttp.open("get", "http://localhost:1337/products", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
   }
   
-  document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', formData, "Yes", "No", () => 
-  {
+  getProducts();
+  
+
+  /*
+    [
+      { id: 1, name: "Smart Home", price: 10000, quantity: 0 },
+      { id: 2, name: "Smart Car", price: 100000, quantity: 0 }
+    ]
+  */
+
+  document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', formData, "Add", "Cancel", () => {
     // STEP 3.
     // send these data to the back end by creating an order
     console.log(`p1 value : ${document.getElementById('p1value').value}`);
