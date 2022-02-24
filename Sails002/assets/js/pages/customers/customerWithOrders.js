@@ -3,7 +3,7 @@ function getQuantities() {
     var mySocket = io.sails.connect();
     mySocket.on('connect', function onConnect() {
         console.log("Socket connected!");
-        let data = JSON.stringify(orderProducts2);
+        // let data = JSON.stringify(orderProducts2);
         mySocket.request(
             {
                 method: 'post',
@@ -20,4 +20,4 @@ function getQuantities() {
         );
     });
 }
-// window.onload = getQuantities;
+window.onload = getQuantities;

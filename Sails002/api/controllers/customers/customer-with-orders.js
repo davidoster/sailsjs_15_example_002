@@ -44,12 +44,12 @@ module.exports = {
     // let createdOrder = await Order.create( { customer_id: inputs.id, totalPrice: ((10000 * 2) + (100000 * 2)) } ).fetch();
 
     let customer = await Customer.find( { id: inputs.id }).populate('orders');
-    
     // just testing for multiple orders
     // await createTestData(inputs.id, await Product.find( { id: { in: [1,2] } } ));
 
-    let productOrders = await Order.find( { customer_id: customer.id } ).populate('products');
+    let productOrders = await Order.find( { customer_id: customer[0].id } ).populate('products');
     customerWithOrders = new CustomerOrders(customer[0], productOrders);
+    // console.log(customerWithOrders);
     // All done.
     return { customerWithOrders: customerWithOrders };
   },

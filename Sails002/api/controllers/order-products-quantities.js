@@ -27,7 +27,7 @@ module.exports = {
             in: inputs.productIds 
           } 
         },
-        select: ['quantity']
+        select: ['quantity', 'price']
       });
     
     let arrayOfQuantities = quantities.map(e => e.quantity);

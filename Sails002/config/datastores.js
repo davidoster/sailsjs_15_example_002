@@ -56,8 +56,8 @@ module.exports.datastores = {
 
   remote: {
     adapter: 'sails-mysql',
-    // url: 'mysql://root:root@127.0.0.1:3306/sails002',
-    url: 'mysql://remoteroot:Maria1801@ra1.anystream.eu:1801/sails002',
+    url: 'mysql://root:root@127.0.0.1:3306/sails002',
+    // url: 'mysql://remoteroot:Maria1801@ra1.anystream.eu:1801/sails002',
   }
 
 

@@ -2,6 +2,9 @@
 
 a [Sails v1](https://sailsjs.com) application
 
+- Dynamic Modal with Bootstrap 5
+![Dynamic Modal Form](/Sails002/dynamic_modal_boostrap5.png)
+
 
 ### Links
 

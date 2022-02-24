@@ -21,12 +21,12 @@ class CustomerOrders {
                 let products;
                 // PLEASE change this awfull code!!! It smells BAD!!!!
                 // You need to break by the time you find the correct order id
-                productOrders.forEach(product => {
+                productOrders.forEach(ο => {
                     // console.log(product);
                     // product.id == orderId
-                    if (product.id == order.id) {
+                    if (ο.id == order.id) {
                         // this needs to be changed in order to get the quantity also!!!???????
-                        products = product.products;
+                        products = ο.products;
                     }
                 });
                 orderWithProducts.products = [...products];

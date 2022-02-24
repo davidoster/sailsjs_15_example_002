@@ -1,12 +1,12 @@
 <!-- check this link how to add bootstrap in Sails: https://www.digitalentropy.co.uk/add-bootstrap-to-your-sailsjs-app/ -->
-
 <div id="customer-with-orders" v-cloak class="container">
   <div class="row">
     <div class="row">
       <h3 class="col-md-4">Customer's Data</h3>
-      <button class="col-md-1 btn btn-info btn-medium" type="button">Add</button>
+      
+      <button class="col-md-1 btn btn-info btn-medium" type="button" id="orderAdd">Add</button>
       <div class="col-md-3 col-heading">
-        <button class="btn btn-warning btn-medium" type="button">Edit</button>
+        <button class="btn btn-warning btn-medium" type="button" >Edit</button>
         <button class="btn btn-danger btn-medium" type="button">Delete</button>
       </div>
     </div>
@@ -96,20 +96,20 @@
                   var orderProducts = `{ "orderId": ${orderId}, "productIds": [${productIds}] }`;
                   var arrayOfProductIds = [];
                   productIds.split(",").forEach(e => arrayOfProductIds.push(parseInt(e)));
-                  var xhttp = new XMLHttpRequest();
-                  xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                      var resultProductIds = Array.from(JSON.parse(this.responseText));
-                      let i = 0;
-                      resultProductIds.forEach(quantity => {
-                          let entry = document.getElementById(`o${orderId}p${arrayOfProductIds[i++]}`);
-                          entry.innerHTML = quantity;
-                      });
-                    }
-                  }
-                  xhttp.open("POST", "http://localhost:1337/orders/quantities", true);
-                  xhttp.setRequestHeader("Content-type", "application/json");
-                  xhttp.send(orderProducts);
+                  // var xhttp = new XMLHttpRequest();
+                  // xhttp.onreadystatechange = function () {
+                  //   if (this.readyState == 4 && this.status == 200) {
+                  //     var resultProductIds = Array.from(JSON.parse(this.responseText));
+                  //     let i = 0;
+                  //     resultProductIds.forEach(quantity => {
+                  //         let entry = document.getElementById(`o${orderId}p${arrayOfProductIds[i++]}`);
+                  //         entry.innerHTML = quantity;
+                  //     });
+                  //   }
+                  // }
+                  // xhttp.open("POST", "http://localhost:1337/orders/quantities", true);
+                  // xhttp.setRequestHeader("Content-type", "application/json");
+                  // xhttp.send(orderProducts);
                 </script>
                 <div class="row">
                   <div class="col">
@@ -124,7 +124,7 @@
                   <div class="col">
                     <%= customerWithOrders.ordersWithProducts[i].products[j].description %>
                   </div>
-                  <div class="col"
+                  <div class="col" 
                     id='<%= "o" + customerWithOrders.ordersWithProducts[i].id + "p" + customerWithOrders.ordersWithProducts[i].products[j].id %>'>
                   </div>
                   <div class="col">
@@ -136,9 +136,16 @@
                 </div>
                 <% } %>
           </div>
-          
           <% } %>
       </div>
     </div>
   </div>
 </div>
+
+<script src="modal-with-custom-action.js"></script>
+<script>
+  document.getElementById('orderAdd').onclick = () => showModal('Add a new Order', 'Add this Order?', "Yes", "No", () => 
+  {
+    console.log('You created an order!');
+  });
+</script>
