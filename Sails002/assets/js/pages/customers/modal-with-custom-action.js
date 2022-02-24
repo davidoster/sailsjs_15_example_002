@@ -33,8 +33,9 @@ const showModal = (title, formData, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
               Can you do it?
             -->
             <select>
-              <option value=${formData.products[0].id}>${formData.products[0].name}</option>
-              <option value=${formData.products[1].id}>${formData.products[1].name}</option>
+              ${formData.products.map(product => {
+                return `<option value=${product.id}>${product.name}</option>`;
+              }).join("")}
             </select>
             
             <!--
